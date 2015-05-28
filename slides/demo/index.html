@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>SPDY Performance Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <script type="text/javascript" src="js/uheprng.js"></script>
+  <script type="text/javascript" src="js/tock.js"></script>
+  <style type="text/css">
+    @import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
+    #clock {
+      width: 300px;
+      margin: auto;
+      color: #eee;
+      font-family: 'League Gothic', Impact, sans-serif;
+      font-weight: normal;
+      font-size: 1.2em;
+      line-height: 1.2;
+      letter-spacing: normal;
+      text-transform: uppercase;
+      text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="clock"></div>
+  <div id="container"></div>
+  <script>
+    var container = document.getElementById('container'),
+        clock = document.getElementById('clock'),
+        imageSource = "images/barcamp.png",
+        prng = uheprng(),
+        numImages = 1000,
+        counter = 0;
+
+    var timer = new Tock({
+      callback: function () {
+        clock.innerHTML = window.location.protocol + ' ' +
+                          timer.msToTime(timer.lap());
+      }
+    });
+
+    var entropy = function() {
+      prng.addEntropy();
+      var prngState = prng.string(256);
+      for (var s = '', i = 0; i < 8; ++i ) {
+        if ( i ) s += String.fromCharCode(10);
+        s += prngState.substr(i * 32, 32);
+      }
+      return s;
+    }
+
+    timer.start();
+
+    for (var i = 0; i < numImages; ++i) {
+      var image = document.createElement('IMG');
+      image.src = imageSource + '?' + entropy();
+      image.width = 30;
+      image.height = 30;
+      image.addEventListener('load', function() {
+        ++counter;
+        if (numImages === counter) {
+          timer.stop();
+        }
+      });
+      container.appendChild(image);
+    }
+  </script>
+</body>
+
+</html>
