@@ -295,6 +295,6 @@ body {
   background-color: transparent;
   box-shadow: none; }
 
-#chart {
-  width: 100%;
+#chart, #demo-container {
+  width: 95%;
   height: 500px; }

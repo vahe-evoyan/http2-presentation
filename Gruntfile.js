@@ -129,7 +129,7 @@ module.exports = function(grunt) {
 				files: [ 'index.html', 'slides/*.html' ]
 			},
 			md: {
-				files: [ 'slides/*.md' ]
+				files: [ 'slides/*.md', '!slides/transcripts.md' ]
 			}
 		}
 

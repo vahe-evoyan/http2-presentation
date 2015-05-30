@@ -45,7 +45,7 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
+				<section data-background="slides/images/web.jpg">
 					<h1>HTTP/2</h1>
 					<h3>The web of future</h3>
 					<p>
@@ -56,20 +56,69 @@
 				<section data-markdown="slides/0001-about-me.html">
 				</section>
 
-				<section data-markdown="slides/0002-spdy-demo.html">
+				<section>
+					<h1>Why HTTP/2?</h1>
+					<div id="demo-container" style="height: 550px">
+					  <a href="#" id="demo-button">DEMO</a>
+					</div>
+					<script type="text/javascript">
+						(function() {
+						  var button = document.getElementById('demo-button'),
+						      container = document.getElementById('demo-container'),
+						      html = '<iframe src="http://localhost:9000"' +
+						                    ' class="split-frame"></iframe>' +
+						             '<iframe src="https://localhost:9001"' +
+						                    ' class="split-frame"></iframe>';
+						  button.addEventListener('click', function(event) {
+						    container.innerHTML = html;
+						    event.preventDefault();
+						  });
+						})();
+					</script>
 				</section>
 
-				<section data-markdown="slides/0003-performance.html">
+				<section data-markdown="slides/0002-performance.html">
 				</section>
 
-				<section data-markdown="slides/0004-tcp-introduction.md">
-				</section>
-
-				<section data-markdown="slides/0005-history-http11.md"
-								 data-separator-vertical="^\n\n">
+				<section data-markdown="slides/0003-tcp-introduction.md">
 				</section>
 
 				<section>
+					<h1>HTTP 1.0</h1>
+					<h2>1995</h2>
+				</section>
+
+				<section data-markdown="slides/0004-history-http11.md"
+								 data-separator-vertical="^\n\n">
+				</section>
+
+				<section data-markdown="slides/0005-workarounds.html"
+								 data-separator-vertical="\n<!-- page -->\n">
+				</section>
+
+				<section data-markdown="slides/0006-spdy.md"
+								 data-background="slides/images/google.jpg">
+				</section>
+
+				<section data-markdown="slides/0007-spdy.md"
+								 data-separator-vertical="\n<!-- page -->\n"
+								 data-background="slides/images/google.jpg">
+				</section>
+
+				<section data-markdown="slides/0008-http2-from-spdy.html"
+								 data-separator-vertical="\n<!-- page -->\n">
+				</section>
+
+				<section data-markdown="slides/0009-server-market-share.html">
+				</section>
+
+				<section>
+					<h1>SO WHAT ABOUT US?</h1>
+					<img src="slides/images/keep-coding.png" />
+				</section>
+
+				<section>
+					<h1>THANKS!</h1>
 				</section>
 
 			</div>
@@ -97,7 +146,7 @@
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true },
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
