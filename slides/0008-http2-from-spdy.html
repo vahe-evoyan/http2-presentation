@@ -10,6 +10,20 @@
   <h3>Application-Layer Protocol Negotiation</h3>
 </div>
 
+<aside class="notes">
+
+Finally, we get into the main topic for today. HTTP/2, as said earlier,
+inherits the most of it's features from SPDY and binary protocol is one of
+them. TLS protocol is optional here, though Firefox and Google are not going to
+support HTTP/2 without TLS.
+
+<br />
+
+Next Protocol Negotiation is renamed to ALPN, which is independent from TLS and
+works for the non-encrypted connection as well.
+
+</aside>
+
 <!-- page -->
 
 # Multiplexing
@@ -20,6 +34,23 @@
 
 ![Frames](slides/images/frames.png)
 
+Note:
+
+So what binary framing actually allows? Multiplexing is the most major part of
+the protocol. Now the client is connected to the origin with a single
+connection.
+
+  - All communication is performed over a single TCP connection that can carry
+    any number of bidirectional streams.
+  - Each stream has a unique identifier and optional priority information that
+    is used to carry bidirectional messages.
+  - Each message is a logical HTTP message, such as a request, or response,
+    which consists of one or more frames.
+  - The frame is the smallest unit of communication that carries a specific
+    type of data — e.g., HTTP headers, message payload, and so on. Frames from
+    different streams may be interleaved and then reassembled via the embedded
+    stream identifier in the header of each frame.
+
 <!-- page -->
 
 # Prioritization
@@ -28,6 +59,12 @@
 
 ### Weighted streams
 ### Dependencies
+
+Note:
+
+Streams are prioritized using weights. Each stream has a weight, a number from
+1..256 which defines it's priority. These streams also have references to each
+other building a tree of dependencies.
 
 <!-- page -->
 
@@ -38,6 +75,24 @@
 ### PUSH_PROMISE Frames
 ### RST_STREAM Frames
 
+Note:
+
+Let's fall back a bit a remember how the browser requests for the resources.
+First thing is to get the main HTML page, which then is parsed for the rest of
+resources like images, style-sheets, scripts etc. These are requested only
+after the main HTML page is loaded and parsed by the browser.
+
+Now, imagine that the server is smart enough to send you all these resources
+beforehand. Isn't it amazing? The way it works is server itself parses the
+content it sends and sends *PROMISE* frames to the client, for each resource it
+thinks would be used by the client. The client can accept or reject by
+responding with the *RESET* frame.
+
+Note that this is impossible to implement with the HTTP 1.1. To reset the
+incoming connection, yet another three way handshake is required for TCP
+protocol (FIN - FIN:ACK - ACK).
+
+
 <!-- page -->
 
 # Header Compression
@@ -45,6 +100,26 @@
 <!-- .slide: data-background="slides/images/zip.jpg" -->
 
 ### HPACK
+
+Note:
+
+Another great feature for the HTTP/2, which again is not possible with HTTP 1.1
+is the header compression called HPACK. This becomes possible because of the
+binary protocol.
+
+In HTTP 1.1 the compression is not possible because of the headers being in
+different contexts. Each request has approximately 500-800 bytes of overhead.
+
+To reduce this overhead and improve performance, HTTP/2 compresses request and
+response header meta-data using the HPACK compression format that uses two
+simple but powerful techniques:
+
+  - It allows the transmitted header fields to be encoded via a static Huffman
+    code, which reduces their individual transfer size.
+  - It requires that both the client and server maintain and update an indexed
+    list of previously seen header fields (i.e., establishes a shared
+    compression context), which is then used as a reference to efficiently
+    encode previously transmitted values.
 
 <!-- page -->
 

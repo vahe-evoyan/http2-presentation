@@ -51,6 +51,16 @@
 					<p>
 						<small><a href="https://evoyan.org">Vahe Evoyan</a> / <a href="http://twitter.com/evoyan">@evoyan</a></small>
 					</p>
+					<p>
+						<small><a href="https://evoyan.org/http2-barcamp/">
+							evoyan.org/http2-barcamp/
+						</a></small>
+					</p>
+					<p>
+						<small><a href="https://evoyan.org/http2-barcamp/">
+							vahe-evoyan.github.io/http2-presentation/
+						</a></small>
+					</p>
 				</section>
 
 				<section data-markdown="slides/0001-about-me.html">
@@ -59,7 +69,10 @@
 				<section>
 					<h1>Why HTTP/2?</h1>
 					<div id="demo-container" style="height: 550px">
-					  <a href="#" id="demo-button">DEMO</a>
+					  <!-- <a href="#" id="demo-button">
+					  	DEMO
+					  </a> -->
+					  <img src="slides/images/demo.png" />
 					</div>
 					<script type="text/javascript">
 						(function() {
@@ -75,6 +88,25 @@
 						  });
 						})();
 					</script>
+					<aside class="notes">
+						<p>
+            I will go ahead and do a small spoiler right at the beginning. This
+            is a comparison of HTTP and HTTPS protocol performances. At first
+            sight HTTPS should be slower, as takes much time for encryption.
+            Please note that the data (images) is coming from the local virtual
+            machine, so the demonstration should be as precise as possible,
+            though there still are a lot of factors why we can't see much more
+            significant difference. Let's run the demo and see what happens.
+						</p>
+						<p>
+            The page consists of two IFrames with identical content. Same large
+            number of images generated inside each page. The result we are
+            expecting to have is to see HTTPS ends loading earlier.
+						</p>
+						<p>
+						Q: Anyone can guess why the HTTPS is faster?
+						</p>
+					</aside>
 				</section>
 
 				<section data-markdown="slides/0002-performance.html">
@@ -86,6 +118,20 @@
 				<section>
 					<h1>HTTP 1.0</h1>
 					<h2>1995</h2>
+
+					<aside class="notes">
+						<p>
+            Why we need multiple TCP connections you'd ask. HTTP 1.0 - the
+            greatest protocol ever has performance issues and in order to
+            minimize the page load time, browsers started to open multiple TCP
+            connections to the servers. Currently most modern browsers operate
+            with 6 simultaneous connections with a single server.
+          	</p>
+						<p>
+            HTTP 1.0 in 1995 almost had all the semantics of the HTTP we know
+            and use now. And the most problematic one - it is sequential.
+            </p>
+					</aside>
 				</section>
 
 				<section data-markdown="slides/0004-history-http11.md"
