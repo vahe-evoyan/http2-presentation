@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>HTTP/2 - The Web of Future</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/custom.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!-- AM Charts -->
+		<script src="lib/js/amcharts.js"></script>
+		<script src="lib/js/xy.js"></script>
+		<script src="lib/js/dark.js"></script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="slides/images/web.jpg">
+					<h1>HTTP/2</h1>
+					<h3>The web of future</h3>
+					<p>
+						<small><a href="https://evoyan.org">Vahe Evoyan</a> / <a href="http://twitter.com/evoyan">@evoyan</a></small>
+					</p>
+					<p>
+						<small><a href="https://evoyan.org/http2-barcamp/">
+							evoyan.org/http2-barcamp/
+						</a></small>
+					</p>
+					<p>
+						<small><a href="https://evoyan.org/http2-barcamp/">
+							vahe-evoyan.github.io/http2-presentation/
+						</a></small>
+					</p>
+				</section>
+
+				<section data-markdown="slides/0001-about-me.html">
+				</section>
+
+				<section>
+					<h1>Why HTTP/2?</h1>
+					<div id="demo-container" style="height: 550px">
+					  <!-- <a href="#" id="demo-button">
+					  	DEMO
+					  </a> -->
+					  <img src="slides/images/demo.png" />
+					</div>
+					<script type="text/javascript">
+						(function() {
+						  var button = document.getElementById('demo-button'),
+						      container = document.getElementById('demo-container'),
+						      html = '<iframe src="http://localhost:9000"' +
+						                    ' class="split-frame"></iframe>' +
+						             '<iframe src="https://localhost:9001"' +
+						                    ' class="split-frame"></iframe>';
+						  button.addEventListener('click', function(event) {
+						    container.innerHTML = html;
+						    event.preventDefault();
+						  });
+						})();
+					</script>
+					<aside class="notes">
+						<p>
+            I will go ahead and do a small spoiler right at the beginning. This
+            is a comparison of HTTP and HTTPS protocol performances. At first
+            sight HTTPS should be slower, as takes much time for encryption.
+            Please note that the data (images) is coming from the local virtual
+            machine, so the demonstration should be as precise as possible,
+            though there still are a lot of factors why we can't see much more
+            significant difference. Let's run the demo and see what happens.
+						</p>
+						<p>
+            The page consists of two IFrames with identical content. Same large
+            number of images generated inside each page. The result we are
+            expecting to have is to see HTTPS ends loading earlier.
+						</p>
+						<p>
+						Q: Anyone can guess why the HTTPS is faster?
+						</p>
+					</aside>
+				</section>
+
+				<section data-markdown="slides/0002-performance.html">
+				</section>
+
+				<section data-markdown="slides/0003-tcp-introduction.md">
+				</section>
+
+				<section>
+					<h1>HTTP 1.0</h1>
+					<h2>1995</h2>
+
+					<aside class="notes">
+						<p>
+            Why we need multiple TCP connections you'd ask. HTTP 1.0 - the
+            greatest protocol ever has performance issues and in order to
+            minimize the page load time, browsers started to open multiple TCP
+            connections to the servers. Currently most modern browsers operate
+            with 6 simultaneous connections with a single server.
+          	</p>
+						<p>
+            HTTP 1.0 in 1995 almost had all the semantics of the HTTP we know
+            and use now. And the most problematic one - it is sequential.
+            </p>
+					</aside>
+				</section>
+
+				<section data-markdown="slides/0004-history-http11.md"
+								 data-separator-vertical="^\n\n">
+				</section>
+
+				<section data-markdown="slides/0005-workarounds.html"
+								 data-separator-vertical="\n<!-- page -->\n">
+				</section>
+
+				<section data-markdown="slides/0006-spdy.md"
+								 data-background="slides/images/google.jpg">
+				</section>
+
+				<section data-markdown="slides/0007-spdy.md"
+								 data-separator-vertical="\n<!-- page -->\n"
+								 data-background="slides/images/google.jpg">
+				</section>
+
+				<section data-markdown="slides/0008-http2-from-spdy.html"
+								 data-separator-vertical="\n<!-- page -->\n">
+				</section>
+
+				<section data-markdown="slides/0009-server-market-share.html">
+				</section>
+
+				<section>
+					<h1>SO WHAT ABOUT US?</h1>
+					<img src="slides/images/keep-coding.png" />
+				</section>
+
+				<section>
+					<h1>THANKS!</h1>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<script src="js/bubblechart.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
